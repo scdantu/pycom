@@ -1,0 +1,304 @@
+# Query params:
+
+#         uniprot_id: The UniProt ID of the protein.
+#         sequence: The amino acid sequence of protein to search for. (full match)
+#         min_length: Minimum number of residues.
+#         max_length: Maximum number of residues.
+#         min_helix: Min percentage of helical structure in the protein.
+#         max_helix: Max percentage of helical structure in the protein.
+#         min_turn: Min percentage of turn structure in the protein.
+#         max_turn: Max percentage of turn structure in the protein.
+#         min_strand: Min percentage of beta strand structure in the protein.
+#         max_strand: Max percentage of beta strand structure in the protein.
+#         organism_id: NCBI Taxonomy ID of the species of the protein. (get_organism_list())
+#         organism: Taxonomic name of the genus / species of the protein. (case-insensitive, /api/get-organism-list
+#         cath: CATH classification of the protein ( '3.40.50.360' or '3.40.*.*' or '3.*' ).
+#         enzyme: Enzyme Commission number of the protein. ( '3.40.50.360' or '3.40.*.*' or '3.*' ).
+#         has_substrate: Whether the protein has a known substrate. (True/False)
+#         has_ptm: Whether the protein has a known post-translational modification. (True/False)
+#         has_pdb: Whether the protein has a known PDB structure. (True/False)
+#         disease: The disease associated with the protein. (name of disease, case-insensitive [e.g 'cancer'])
+#         disease_id: The ID of the disease associated with the protein. ('DI-00001', get_disease_list()
+#         has_disease: Whether the protein is associated with a disease. (True/False)
+#         cofactor: The cofactor associated with the protein. (name of cofactor, case-insensitive [e.g 'Zn(2+)'])
+#         cofactor_id: The ID of the cofactor associated with the protein. ('CHEBI:00001', get_cofactor_list())
+#         biological_process: The biological process associated with the protein.
+#                (name of process, case-insensitive, /api/get-biological-process-list for all)
+#         cellular_component: The cellular component associated with the protein.
+#                (name of component, case-insensitive, get_cellular_component_list())
+#         developmental_stage: The developmental stage associated with the protein.
+#                (name of stage, case-insensitive, get_developmental_stage_list())
+#         domain: The domain associated with the protein.
+#                (name of domain, case-insensitive, /api/...)
+#         ligand: The ligand associated with the protein.
+#                (name of ligand, case-insensitive, /api/...
+#         molecular_function: The molecular function associated with the protein.
+#                (name of function, case-insensitive, get_molecular_function_list())
+#         ptm: The post-translational modification associated with the protein.
+#                (name of ptm, case-insensitive, get_ptm_list())
+
+
+# Other params:
+
+#         page: The page number of results to return. (1-i)
+#         per_page: The number of results per page. (1-100)
+#         matrix: Whether to return the coevolution matrix with the results.
+
+openapi: 3.0.0
+info:
+  version: 0.6.3
+  title: PyCom Protein Database API
+  description: An API for querying the PyCom Coevolution Matrix Database
+servers:
+  - url: https://pycom.brunel.ac.uk
+
+paths:
+  /api/find:
+    get:
+      summary: Find proteins matching provided parameters.
+      description: Find proteins matching provided parameters. ALL parameters can passed as part of the query (https://pycom.brunel.ac.uk/api/find?has_ptm=true) or body (JSON format)
+      parameters:
+        - name: matrix
+          in: query
+          description: Whether to return the coevolution matrix for each protein
+          schema:
+            type: boolean
+            example: true
+        - name: page
+          in: query
+          description: Page number
+          schema:
+            type: integer
+        - name: per_page
+          in: query
+          description: Number of results per page
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: uniprot_id
+          in: query
+          description: The UniProt ID of the protein.
+          schema:
+            type: string
+            example: "P01308"
+        - name: sequence
+          in: query
+          description: The amino acid sequence of protein to search for. (full match)
+          schema:
+            type: string
+            example: "DVVSPPVCGN"
+        - name: min_length
+          in: query
+          description: Minimum number of residues in the protein.
+          schema:
+            type: number
+            example: 200
+        - name: max_length
+          in: query
+          description: Maximum number of residues in the protein.
+          schema:
+            type: number
+            example: 200
+        - name: min_helix
+          in: query
+          description: Minimum percentage of helical structure in the protein.
+          schema:
+            type: number
+            minimum: 0
+            maximum: 1
+            example: 0.5
+        - name: max_helix
+          in: query
+          description: Maximum percentage of helical structure in the protein.
+          schema:
+            type: number
+            minimum: 0
+            maximum: 1
+            example: 0.5
+        - name: min_turn
+          in: query
+          description: Minimum percentage of turn structure in the protein.
+          schema:
+            type: number
+            minimum: 0
+            maximum: 1
+            example: 0.5
+        - name: max_turn
+          in: query
+          description: Maximum percentage of turn structure in the protein.
+          schema:
+            type: number
+            minimum: 0
+            maximum: 1
+            example: 0.5
+        - name: min_strand
+          in: query
+          description: Minimum percentage of strand structure in the protein.
+          schema:
+            type: number
+            minimum: 0
+            maximum: 1
+            example: 0.5
+        - name: max_strand
+          in: query
+          description: Maximum percentage of strand structure in the protein.
+          schema:
+            type: number
+            minimum: 0
+            maximum: 1
+            example: 0.5
+        - name: organism
+          in: query
+          description: Taxonomic name of the genus / species of the protein. Surround with ':' for precise matches, e.g. ':homo:' returns "Homo sapiens" and "Homo sapiens neanderthalensis" vs 'homo' also returns **homo**eomma, t**homo**mys, and *hundreds* others; see /api/get-organism-list
+          schema:
+            type: string
+            example: ":homo:"
+        - name: organism_id
+          in: query
+          description: NCBI Taxonomy ID of the species of the protein, e.g. 9606 for Homo sapiens, see /api/get-organism-list (prefer to use `organism` instead)
+          schema:
+            type: string
+            example: "9606"
+        - name: cath
+          in: query
+          description: CATH classification of the protein ( '3.40.50.360' or '3.40.*.*' or '3.*' )
+          schema:
+            type: string
+            example: "3.40.50.360"
+        - name: enzyme
+          in: query
+          description: Enzyme Commission number of the protein. ( `1.3.1.3` or `1.3.*.*` or `1.*` )
+          schema:
+            type: string
+            example: "1.3.1.3"
+        - name: has_substrate
+          in: query
+          description: Whether the protein has a known substrate.
+          schema:
+            type: boolean
+            example: true
+        - name: has_ptm
+          in: query
+          description: Whether the protein has a known post-translational modification.
+          schema:
+            type: boolean
+            example: true
+        - name: has_pdb
+          in: query
+          description: Whether the protein has a known PDB structure.
+          schema:
+            type: boolean
+            example: true
+        - name: disease
+          in: query
+          description: The disease associated with the protein. (name of disease, case-insensitive [e.g 'cancer']), see /api/get-disease-list
+          schema:
+            type: string
+            example: "cancer"
+        - name: disease_id
+          in: query
+          description: The ID of the disease associated with the protein. ('DI-00001', see /api/get-disease-list)
+          schema:
+            type: string
+            example: "DI-00001"
+        - name: has_disease
+          in: query
+          description: Whether the protein is associated with a disease.
+          schema:
+            type: boolean
+            example: true
+        - name: cofactor
+          in: query
+          description: The cofactor associated with the protein. (name of cofactor, case-insensitive [e.g 'Zn(2+)'], see /api/get-cofactor-list)
+          schema:
+            type: string
+            example: "Zn(2+)"
+        - name: cofactor_id
+          in: query
+          description: The ID of the cofactor associated with the protein. ('CHEBI:00001', see /api/get-cofactor-list)
+          schema:
+            type: string
+            example: "CHEBI:00001"
+        - name: biological_process
+          in: query
+          description: Biological process associated with the protein. (e.g `antiviral defense`, see /api/get-biological-process-list)
+          schema:
+            type: string
+            example: "antiviral defense"
+        - name: cellular_component
+          in: query
+          description: Cellular component associated with the protein. (e.g `nucleus`, see /api/get-cellular-component-list)
+          schema:
+            type: string
+            example: "nucleus"
+        - name: domain
+          in: query
+          description: Domain associated with the protein. (e.g `zinc-finger`, see /api/get-domain-list)
+          schema:
+            type: string
+            example: "zinc-finger"
+        - name: ligand
+          in: query
+          description: Ligand associated with the protein. (e.g `zinc`, see /api/get-ligand-list)
+          schema:
+            type: string
+            example: "zinc"
+        - name: molecular_function
+          in: query
+          description: Molecular function associated with the protein. (e.g `antioxidant activity`, see /api/get-molecular-function-list)
+          schema:
+            type: string
+            example: "antioxidant activity"
+        - name: ptm
+          in: query
+          description: Post-translational modification associated with the protein. (e.g `phosphoprotein`, see /api/get-ptm-list)
+          schema:
+            type: string
+            example: "phosphoprotein"
+      responses:
+        '200':
+          description: Successful Operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Protein'
+                  page:
+                    type: integer
+                  total_pages:
+                    type: integer
+                  result_count:
+                    type: integer
+                  showing:
+                    type: string
+
+  /api/get-disease-list:
+    get:
+      summary: Get list of diseases
+      responses:
+        '200':
+          description: Successful Operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+
+components:
+  schemas:
+    Protein:
+      type: object
+      properties:
+        uniprot_id:
+          type: string
+        sequence:
+          type: string
+        min_length:
+          type: integer
+        # additional properties can be added here following the similar structure
