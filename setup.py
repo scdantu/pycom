@@ -14,9 +14,10 @@ extras_require = {
 setup(
     name='pycom',
     version=version,
-    description='Library for interacting with the Pycom database of coevolution matrices of proteins',
-    author='Phil',
+    description='Library for interacting with the PyCoM database of Coevolution matrices of proteins',
+    author='Phillip Bibik',
     url='https://github.com/scdantu/pycom',
+    license_files=('LICENSE.txt')
     packages=find_packages(),
     install_requires=[
         'pandas',
@@ -26,6 +27,7 @@ setup(
     ],
     extras_require=extras_require,
     python_requires='>=3.8',
+
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
