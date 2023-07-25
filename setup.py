@@ -17,7 +17,7 @@ setup(
     description='Library for interacting with the PyCoM database of Coevolution matrices of proteins',
     author='Phillip Bibik',
     url='https://github.com/scdantu/pycom',
-    license_files=('LICENSE.txt')
+    license_files=('LICENSE.txt'),
     packages=find_packages(),
     install_requires=[
         'pandas',
