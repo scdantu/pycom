@@ -38,7 +38,7 @@ def get_valid_find_params(
     if constraint_dict is None:  # no dictionary passed, use kwargs
         constraint_dict = kwargs
 
-    if constraint_dict == {}:
+    if constraint_dict == {} and not remote:
         warn_unconstrained_find()
 
     valid_keys = set(ProteinParams)

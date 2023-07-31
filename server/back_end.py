@@ -1,8 +1,14 @@
 import os
+import logging
+from logging.handlers import TimedRotatingFileHandler
+from concurrent.futures import ThreadPoolExecutor
 
 import flask
 from flask_caching import Cache
 from flask_parameter_validation import ValidateParameters, Query
+
+from ipwhois import IPWhois, BaseIpwhoisException
+from dns.resolver import NoResolverConfiguration
 
 from pycom import PyCom, ProteinParams
 from pycom.interface import _find_helper  # noqa
@@ -27,15 +33,59 @@ _find_helper.query_db = cache.memoize(cache_none=True)(_find_helper.query_db)
 pycom_db_path = os.environ.get('PYCOM_DB_PATH', '~/docs/pycom.db')
 pycom_mat_path = os.environ.get('PYCOM_MAT_PATH', '~/docs/pycom.mat')
 
-# @deprecated
-# pycom_aln_path = os.environ.get('PYCOM_ALN_PATH', '~/docs/aln')
-
 pyc = PyCom(db_path=pycom_db_path, mat_path=pycom_mat_path)
 valid_protein_params = set(ProteinParams)
+
+# set up logging
+log_executors = ThreadPoolExecutor(max_workers=1)
+
+log_dir = os.path.expanduser(os.environ.get('PYCOM_LOG_DIR', '~/docs/logs'))
+if not os.path.exists(log_dir):
+    os.makedirs(log_dir)
+
+log_formatter = logging.Formatter('%(asctime)s - %(message)s')
+log_handler = TimedRotatingFileHandler(os.path.join(log_dir, 'pycom.log'), when='midnight', backupCount=356*2)
+log_handler.setFormatter(log_formatter)
+log_handler.suffix = '%Y%m%d'
+logger = logging.getLogger('pycom')
+logger.addHandler(log_handler)
+logger.setLevel(logging.INFO)
+
+
+def _log_handler(ip, message):
+    try:
+        ip_info = IPWhois(ip).lookup_rdap()
+        country = ip_info.get('network', {}).get('country', None)
+        name = ip_info.get('network', {}).get('name', None)
+        asn = ip_info.get('asn_description', None)
+    except (BaseIpwhoisException, NoResolverConfiguration):
+        country = None
+        name = None
+        asn = None
+
+    logger.info(f'{ip} - {country} - {name} - {asn} - {message}')
+
+
+def log_request():
+    """
+    This function logs the request parameters and JSON message body, if present.
+    These are compressed into one dictionary and logged as a single message.
+    """
+    parameters = flask.request.args.to_dict()
+    json_body = flask.request.get_json(force=True, silent=True)
+    if json_body is None:
+        json_body = {}
+
+    log_data = {**parameters, **json_body}
+    endpoint = flask.request.path
+    ip = flask.request.remote_addr
+
+    log_executors.submit(_log_handler, ip, f'{endpoint} - {log_data}')
 
 
 @app.route('/api/', methods=['GET'])
 def landing():
+    ip_info = IPWhois(flask.request.remote_addr).lookup_rdap()
     raise AssertionError('/api is not an endpoint. Try /api/find, /api/get-disease-list, '
                          '/api/get-cofactor-list, /api/get-organism-list, /api/get-biological-process-list, '
                          '/api/get-cellular-component-list, /api/get-development-stage-list, /api/get-domain-list, '
@@ -56,6 +106,7 @@ def find(
         page: int = Query(1),
         per_page: int = Query(default=10, min_int=1, max_int=100)
 ):
+    log_request()
     data = flask.request.args.to_dict()
 
     if flask.request.data not in {b'', None}:
@@ -234,4 +285,4 @@ def handle_404(_):
 
 
 if __name__ == '__main__':
-    app.run(debug=False, port=5351)
+    app.run(debug=True, port=5351)

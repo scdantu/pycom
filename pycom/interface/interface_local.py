@@ -1,3 +1,4 @@
+import math
 from typing import Optional
 
 import pandas as pd
@@ -97,6 +98,10 @@ class PyComLocal(PyCom):
         query_result: pd.DataFrame = fh.query_db(db_path=self.db_path, query=query, params=params)
         query_result['matrix'] = pd.Series([None] * len(query_result), dtype='object')
 
+        query_result.attrs['page'] = 1
+        query_result.attrs['total_pages'] = 1
+        query_result.attrs['total_results'] = len(query_result)
+
         return query_result
 
     def load_matrices(
@@ -141,9 +146,13 @@ class PyComLocal(PyCom):
         :param per_page: The number of results to return per page
         """
 
-        if 1 > page:
-            raise ValueError(f'Pagination starts at 1, not {page}')
-        return df.iloc[(page - 1) * per_page:page * per_page]
+        assert 1 <= page, f'Pagination starts at 1, not {page}'
+        paginated_df = df.iloc[(page - 1) * per_page:page * per_page]
+
+        paginated_df.attrs['page'] = page
+        paginated_df.attrs['total_pages'] = math.ceil(len(df) / per_page)
+
+        return paginated_df
 
     def get_data_loader(self) -> PyComDataLoader:
         """
@@ -195,19 +204,3 @@ class PyComLocal(PyCom):
     def get_ptm_list(self) -> pd.DataFrame:
         query = "SELECT keywordName as name FROM keyword WHERE keywordCategory = 'PTM'"
         return query_database(query, self.db_path)
-
-
-if __name__ == '__main__':
-    # get_developmental_stage_list
-    # get_domain_list
-    # get_ligand_list
-    # get_molecular_function_list
-    # get_ptm_list
-    pyc = PyComLocal(db_path='~/docs/pycom.db', mat_path='pycom.mat')
-    print(pyc.get_biological_process_list())
-    print(pyc.get_cellular_component_list())
-    print(pyc.get_developmental_stage_list())
-    print(pyc.get_domain_list())
-    print(pyc.get_ligand_list())
-    print(pyc.get_molecular_function_list())
-    print(pyc.get_ptm_list())
