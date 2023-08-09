@@ -14,8 +14,9 @@ extras_require = {
 setup(
     name='pycom',
     version=version,
-    description='Library for interacting with the PyCoM database of Coevolution matrices of proteins',
-    author='Phillip Bibik',
+    description='Python library PyCoM for interacting with the database of Coevolution matrices of proteins (PyCoMdb)',
+    author='Phillip Bibik, Sarath Chandra Dantu',
+    author_email='sarath.dantu@brunel.ac.uk',
     url='https://github.com/scdantu/pycom',
     license_files=('LICENSE.txt'),
     packages=find_packages(),
@@ -31,7 +32,6 @@ setup(
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
-        'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',

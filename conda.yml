@@ -1,8 +1,0 @@
-name: pycom
-dependencies:
-  - python>=3.8
-  - numpy
-  - h5py
-  - requests
-  - pandas
-  - flask
