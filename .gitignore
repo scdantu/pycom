@@ -133,3 +133,5 @@ localhistory
 .DS_Store
 
 .vscode/*
+
+render_html.sh
