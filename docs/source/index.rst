@@ -6,7 +6,7 @@
 Introduction!
 =============
 
-   PyCoM is a python API to the Coevolution Matrix database (PyCoMdb), containing *457,622* annotated proteins, from `UniProtKB/Swiss-Prot <https://www.expasy.org/resources/uniprotkb-swiss-prot>`_  with their coevolution matrices calculated using `HH-suite3 <https://github.com/soedinglab/hh-suite>`_ and `CCMpred <https://github.com/soedinglab/CCMpred>`_. 
+   PyCoM is a Python API to the Coevolution Matrix database (PyCoMdb), containing *457,622* annotated proteins, from `UniProtKB/Swiss-Prot <https://www.expasy.org/resources/uniprotkb-swiss-prot>`_  with their coevolution matrices calculated using `HH-suite3 <https://github.com/soedinglab/hh-suite>`_ and `CCMpred <https://github.com/soedinglab/CCMpred>`_. 
 
    The parameters for generating the alignment using `HH-suite3 <https://github.com/soedinglab/hh-suite>`_  can be found in `Kamisetty et al. 2013 <https://www.pnas.org/doi/10.1073/pnas.1314045110>`_.
 

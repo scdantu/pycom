@@ -134,4 +134,5 @@ localhistory
 
 .vscode/*
 
+test.py
 render_html.sh

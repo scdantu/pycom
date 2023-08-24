@@ -14,4 +14,4 @@ Tutorials
       ../../tutorials/jp_notebooks/03_PyCoM_DB_WebAPI
       ../../tutorials/jp_notebooks/04_UseCases
       ../../tutorials/jp_notebooks/05_Alignment_analysis
-      
+      ../../tutorials/jp_notebooks/06_Paper_Images.ipynb     

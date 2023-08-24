@@ -17,11 +17,11 @@ Differences
 -----------
 
    You can work with PyCoMdb in three different modes:
-      #. Download the database to your laptop and work with it alias *PyCoM local*
-      #. Work with the database on PyCoM server *PyCoM remote*
-      #. Work with the WebAPI without using Python *PyCoM WebAPI* 
+      #. *PyCoM (local)*: Download the database to your computer and use PyCoM.
+      #. *PyCoM (remote)*: Work with the database on PyCoM server using PyCoM.
+      #. *WebAPI*: Work with the WebAPI without using PyCoM. 
 
-The difference in access to features is shown in the table below:
+Using PyCoM (local) allows access to all the functional features, while PyCoM (remote) and the WebAPI has some limitations as shown in the table below:
     
 .. xlsx-table::
    :file: tables/Table2.xlsx
