@@ -133,6 +133,7 @@ localhistory
 .DS_Store
 
 .vscode/*
+staging/
 
 test.py
 render_html.sh
