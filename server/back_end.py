@@ -3,12 +3,12 @@ import logging
 from logging.handlers import TimedRotatingFileHandler
 from concurrent.futures import ThreadPoolExecutor
 
+from ipwhois import IPWhois, BaseIpwhoisException
+from dns.resolver import NoResolverConfiguration
+
 import flask
 from flask_caching import Cache
 from flask_parameter_validation import ValidateParameters, Query
-
-from ipwhois import IPWhois, BaseIpwhoisException
-from dns.resolver import NoResolverConfiguration
 
 from pycom import PyCom, ProteinParams
 from pycom.interface import _find_helper  # noqa
@@ -58,7 +58,7 @@ def _log_handler(ip, message):
         country = ip_info.get('network', {}).get('country', None)
         name = ip_info.get('network', {}).get('name', None)
         asn = ip_info.get('asn_description', None)
-    except (BaseIpwhoisException, NoResolverConfiguration):
+    except (BaseIpwhoisException, NoResolverConfiguration, ValueError):
         country = None
         name = None
         asn = None
@@ -78,14 +78,29 @@ def log_request():
 
     log_data = {**parameters, **json_body}
     endpoint = flask.request.path
-    ip = flask.request.remote_addr
+    ip = _get_client_ip(flask.request)
 
     log_executors.submit(_log_handler, ip, f'{endpoint} - {log_data}')
 
 
+def _get_client_ip(request):
+    """
+    This function returns the client IP address, if available.
+    The following NGINX configuration should be used:
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Forwarded-Protocol https;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_redirect off;
+    """
+    if request.access_route:
+        return request.access_route[-1]
+    else:
+        return None
+
+
 @app.route('/api/', methods=['GET'])
 def landing():
-    ip_info = IPWhois(flask.request.remote_addr).lookup_rdap()
     raise AssertionError('/api is not an endpoint. Try /api/find, /api/get-disease-list, '
                          '/api/get-cofactor-list, /api/get-organism-list, /api/get-biological-process-list, '
                          '/api/get-cellular-component-list, /api/get-development-stage-list, /api/get-domain-list, '
