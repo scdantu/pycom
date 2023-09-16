@@ -94,9 +94,13 @@ class PyComRemote(PyCom):
             return pd.DataFrame()  # Return empty DataFrame if there are no results.
 
         res = pd.DataFrame(response['results'])
-        res.attrs['page'] = response['page']
-        res.attrs['total_pages'] = response['total_pages']
-        res.attrs['total_results'] = response['result_count']
+
+        try:
+            res.attrs['page'] = response['page']
+            res.attrs['total_pages'] = response['total_pages']
+            res.attrs['total_results'] = response['result_count']
+        except AttributeError:
+            pass  # pandas version without attrs support
 
         if res.empty:
             return res

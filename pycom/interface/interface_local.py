@@ -98,9 +98,12 @@ class PyComLocal(PyCom):
         query_result: pd.DataFrame = fh.query_db(db_path=self.db_path, query=query, params=params)
         query_result['matrix'] = pd.Series([None] * len(query_result), dtype='object')
 
-        query_result.attrs['page'] = 1
-        query_result.attrs['total_pages'] = 1
-        query_result.attrs['total_results'] = len(query_result)
+        try:
+            query_result.attrs['page'] = 1
+            query_result.attrs['total_pages'] = 1
+            query_result.attrs['total_results'] = len(query_result)
+        except AttributeError:
+            pass  # pandas version without attrs support
 
         return query_result
 
@@ -149,8 +152,11 @@ class PyComLocal(PyCom):
         assert 1 <= page, f'Pagination starts at 1, not {page}'
         paginated_df = df.iloc[(page - 1) * per_page:page * per_page]
 
-        paginated_df.attrs['page'] = page
-        paginated_df.attrs['total_pages'] = math.ceil(len(df) / per_page)
+        try:
+            paginated_df.attrs['page'] = page
+            paginated_df.attrs['total_pages'] = math.ceil(len(df) / per_page)
+        except AttributeError:
+            pass  # pandas version without attrs support
 
         return paginated_df
 
