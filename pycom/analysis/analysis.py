@@ -7,7 +7,7 @@ from collections import Counter
 class CoMAnalysis(object):
     """
 
-    CoMAnalysis provides functions to manipulate coevolution matrices from the pandas dataframe
+    CoMAnalysis provides functions to manipulate coevolution matrices from the pandas dataframe and save the interesting residue pairs into an ASCII file
 
     Usage:
 
@@ -20,7 +20,7 @@ class CoMAnalysis(object):
 
     def calculate_scaled_coevolution_matrix(self,matrix) -> np.ndarray:
         '''
-        Scales coevolution matrix by average as GREMLIN
+        Scales coevolution matrix by average
         :param matrix:
         :return: scaled_matrix
         '''
@@ -69,7 +69,8 @@ class CoMAnalysis(object):
         return df
     def get_top_scoring_residues(self,matrix,res_gap=5,percentile=90):
         '''
-
+        returns top scoring residues using percentile cut-off
+        
         :param _matrix:
         :param res_gap:
         :param percentile:
@@ -99,7 +100,7 @@ class CoMAnalysis(object):
     
     def get_residue_frequencies(self,top_residue_pairs):
         '''
-            Calculate the residue frequencies count from the top_scoring_residue pairs list
+        Calculate the residue frequencies count from the top_scoring_residue pairs list
             
         :param top_residue_pairs:
         :return: dataframe with residueID and count df_res_count

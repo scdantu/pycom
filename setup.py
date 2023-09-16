@@ -25,6 +25,7 @@ setup(
         'numpy',
         'h5py',
         'requests',
+        'logomaker'
     ],
     extras_require=extras_require,
     python_requires='>=3.8',

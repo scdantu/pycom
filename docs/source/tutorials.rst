@@ -1,7 +1,12 @@
 Tutorials
 =========
 
-   After successfully `installing <install>`_ PyCoM please go through the following `tutorials <https://github.com/scdantu/pycom/tree/main/tutorials>`_
+   After successfully `installing <gettingstarted>`_ and completing the `quick guides <gettingstarted>`_ of PyCoM
+   please go through the following tutorials that will show you how to:
+   #. Create a data analysis workflow with PyCoM
+   #. Some example Usecases
+   #. How to analyse an example alignment
+   #. How to generate the images from the manuscript
 
 .. toctree::
    :numbered:
@@ -9,9 +14,7 @@ Tutorials
    :titlesonly:
    :maxdepth: 3
    
-      ../../tutorials/jp_notebooks/01_PyCoM_DB_Local
-      ../../tutorials/jp_notebooks/02_PyCoM_DB_Remote
-      ../../tutorials/jp_notebooks/03_PyCoM_DB_WebAPI
-      ../../tutorials/jp_notebooks/04_UseCases
-      ../../tutorials/jp_notebooks/05_Alignment_analysis
-      ../../tutorials/jp_notebooks/06_Paper_Images.ipynb     
+      ../../tutorials/jp_notebooks/tutorials/01_Workflow
+      ../../tutorials/jp_notebooks/tutorials/02_UseCases
+      ../../tutorials/jp_notebooks/tutorials/03_Alignment_analysis
+      ../../tutorials/jp_notebooks/tutorials/04_Paper_Images.ipynb     

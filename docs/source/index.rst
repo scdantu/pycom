@@ -1,7 +1,5 @@
-.. PyCoM documentation master file, created by
-   sphinx-quickstart on Thu Aug 17 13:51:37 2023.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+.. PyCoM documentation master file
+
 
 Introduction!
 =============
@@ -13,10 +11,10 @@ Introduction!
    We provide you simple tools written in Python to `query <tutorials.html>`_, `extract <tutorials.html>`_ and `visualise <tutorials.html>`_ data for your choice of protein(s).
 
 
-.. _ref-cite_pycom:
 
 How to Cite
-===========
+-----------
+
    Bibik. P, Alibai. S, Pandini. A, Dantu, S.C. "PyCoM: a python API to query, extract and visualise coevolution matrices". 2023
 
 
@@ -24,14 +22,15 @@ How to Cite
    :maxdepth: 3
    :caption: Contents:
    
-      Installation <install>
       Database <database>
+      Getting started <gettingstarted>
       Tutorials <tutorials>
+      Documentation <documentation>
       Help <help>
 
 
 Indices and tables
-==================
+------------------
 
 * :ref:`genindex`
 * :ref:`modindex`

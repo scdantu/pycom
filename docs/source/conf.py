@@ -10,9 +10,9 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-# import os
-# import sys
-# sys.path.insert(0, os.path.abspath('.'))
+import os
+import sys
+sys.path.insert(0, os.path.abspath('../../'))
 
 
 # -- Project information -----------------------------------------------------
@@ -20,9 +20,9 @@
 project = 'PyCoM'
 copyright = '2023, Sarath Dantu'
 author = 'Sarath Dantu'
-
+version = '1.0'
 # The full version, including alpha/beta/rc tags
-release = '0.8'
+release = version
 
 
 # -- General configuration ---------------------------------------------------
@@ -37,7 +37,8 @@ extensions = ['sphinx.ext.intersphinx',
               'sphinx.ext.autosummary',
               'sphinx_copybutton',
               'sphinxcontrib.excel',
-              'sphinxcontrib.xlsxtable'
+              'sphinxcontrib.xlsxtable',
+              'sphinx.ext.napoleon'
               ]
 
 # Add any paths that contain templates here, relative to this directory.
