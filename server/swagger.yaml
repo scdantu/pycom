@@ -31,7 +31,7 @@
 #         domain: The domain associated with the protein.
 #                (name of domain, case-insensitive, /api/...)
 #         ligand: The ligand associated with the protein.
-#                (name of ligand, case-insensitive, /api/...
+#                (name of ligand, case-insensitive, /api/...)
 #         molecular_function: The molecular function associated with the protein.
 #                (name of function, case-insensitive, get_molecular_function_list())
 #         ptm: The post-translational modification associated with the protein.

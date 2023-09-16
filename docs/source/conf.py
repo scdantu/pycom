@@ -18,7 +18,7 @@ sys.path.insert(0, os.path.abspath('../../'))
 # -- Project information -----------------------------------------------------
 
 project = 'PyCoM'
-copyright = '2023, Sarath Dantu'
+copyright = '2023, Sarath Dantu'  # noqa
 author = 'Sarath Dantu'
 version = '1.0'
 # The full version, including alpha/beta/rc tags

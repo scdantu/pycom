@@ -18,7 +18,7 @@ setup(
     author='Phillip Bibik, Sarath Chandra Dantu',
     author_email='sarath.dantu@brunel.ac.uk',
     url='https://github.com/scdantu/pycom',
-    license_files=('LICENSE.txt'),
+    license_files='LICENSE.txt',
     packages=find_packages(),
     install_requires=[
         'pandas',

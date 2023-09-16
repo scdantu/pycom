@@ -3,8 +3,8 @@ import logging
 from logging.handlers import TimedRotatingFileHandler
 from concurrent.futures import ThreadPoolExecutor
 
-from ipwhois import IPWhois, BaseIpwhoisException
-from dns.resolver import NoResolverConfiguration
+from ipwhois import IPWhois, BaseIpwhoisException  # noqa, only used for server logging
+from dns.resolver import NoResolverConfiguration  # noqa, only used for server logging
 
 import flask
 from flask_caching import Cache
