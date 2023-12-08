@@ -91,22 +91,45 @@ class CoMAnalysis(object):
         self.df_top_scores['ResB'] = self.df_top_scores['ResB'].astype('str')
         return self.df_top_scores
 
-    def get_residue_frequencies(self, top_residue_pairs):
-        """
+    def get_top_contacts_from_coevolution(self,scaled_matrix,num_contact_factor=1.5):
+        '''
+            returns 'N' top scoring residues as a dataframe
+            by default, consistent with GREMLIN, top 1.5xL pairs are returned, L being the length of the protein
+        
+        :param scaled_matrix:
+        :param num_contact_factor:
+        :return: data frame with top residue pairs
+        '''        
+        
+        max_i,max_j = scaled_matrix.shape
+        
+        if(max_i == 0):
+            print("Matrix is empty. Please check and provide a scaled matrix")
+            exit()
+        
+        if(max_i>0):
+            num_top_pairs = num_contact_factor*max_i
+            self.get_top_scoring_residues(scaled_matrix,3,75)
+            self.df_top_contacts = self.df_top_scores.iloc[:num_top_pairs]
+            return self.df_top_contacts
+    
+    def get_residue_frequencies(self,top_residue_pairs):
+        '''
         Calculate the residue frequencies count from the top_scoring_residue pairs list
 
         :param top_residue_pairs:
         :return: dataframe with residueID and count df_res_count
-        """
+        '''
+        
         if len(top_residue_pairs) == 0:
             print("Length of the residue pairs list is 0. Nothing to be done.")
         else:
-            '''
+        
             _top_res_pairs_array=np.asarray(top_residue_pairs)
             _res_array_count=np.array(np.unique(np.concatenate((_top_res_pairs_array[:,0],_top_res_pairs_array[:,1])),return_counts=True)).T
             df_res_count=pd.DataFrame(_res_array_count,columns=["residueID","count"],dtype=np.int32)
             df_res_count=df_res_count.sort_values(by=['count'],ascending=False)
-            '''
+        
             _full_residue_list = top_residue_pairs["ResA"].to_list() + top_residue_pairs["ResB"].to_list()
 
             _dict_residue_counts = dict(Counter(_full_residue_list))
