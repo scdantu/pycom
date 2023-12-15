@@ -100,7 +100,7 @@ class CoMAnalysis(object):
         :param num_contact_factor:
         :return: data frame with top residue pairs
         '''        
-        
+        df_top_contacts=[]
         max_i,max_j = scaled_matrix.shape
         
         if(max_i == 0):
@@ -108,10 +108,14 @@ class CoMAnalysis(object):
             exit()
         
         if(max_i>0):
-            num_top_pairs = num_contact_factor*max_i
+            num_top_pairs = round(num_contact_factor*max_i)
             self.get_top_scoring_residues(scaled_matrix,3,75)
-            self.df_top_contacts = self.df_top_scores.iloc[:num_top_pairs]
-            return self.df_top_contacts
+            if(len(self.df_top_scores)>num_top_pairs):
+                df_top_contacts=self.df_top_scores.iloc[:num_top_pairs]
+            else:
+                df_top_contacts=self.df_top_scores
+                
+        return df_top_contacts
     
     def get_residue_frequencies(self,top_residue_pairs):
         '''
