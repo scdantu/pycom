@@ -9,13 +9,15 @@ extras_require = {
     'flask-caching': ['Flask-Caching'],
     'flask-parameter-validation': ['Flask-Parameter-Validation'],
     'werkzeug': ['Werkzeug'],
+    'requests': ['Requests'],
+    'logomaker': ['logomaker']
 }
 
 setup(
     name='pycom',
     version=version,
     description='Python library PyCoM for interacting with the database of Coevolution matrices of proteins (PyCoMdb)',
-    author='Phillip Bibik, Sarath Chandra Dantu',
+    author='Philipp Bibik, Sarath Chandra Dantu',
     author_email='sarath.dantu@brunel.ac.uk',
     url='https://github.com/scdantu/pycom',
     license_files='LICENSE.txt',
@@ -23,9 +25,7 @@ setup(
     install_requires=[
         'pandas',
         'numpy',
-        'h5py',
-        'requests',
-        'logomaker'
+        'h5py'
     ],
     extras_require=extras_require,
     python_requires='>=3.8',
