@@ -10,9 +10,59 @@ class CoMAnalysis(object):
     CoMAnalysis provides functions to manipulate coevolution matrices from
     the pandas dataframe and save the interesting residue pairs into an ASCII file
     """
+
     def __init__(self):
         self.df_top_scores = pd.DataFrame()
         self.df_residue_counts = pd.DataFrame()
+
+    def add_contact_predictions(self, df: pd.DataFrame, contact_factor: int = 1.5):
+        """
+        Takes in a datafrmae containing coevolution matrices ('matrix' column) and adds a column
+        with contact predictions ('contact_matrix' column).
+
+        By default, the top 1.5xL pairs are returned as contact predictions, L being the length of the protein
+        This can be modified by changing the contact_factor parameter.
+
+        :param df: dataframe with coevolution matrices (matrix column)
+        :param contact_factor: 1.5 (default)
+        :return: dataframe with contact predictions (contact_matrix column)
+        """
+        # assert mode in ['CCMpred'], "Only CCMpred is supported at the moment"
+        assert 'matrix' in df.columns, "No coevolution matrix column in dataframe"
+        assert contact_factor > 0, "contact_factor should be greater than 0 (default: 1.5)"
+
+        # scale_and_normalise_coevolution_matrices
+        scaled_mat = CoMAnalysis.scale_and_normalise_coevolution_matrices(df, normalise_matrix=False)
+        # top_contacts = self.get_top_contacts_from_coevolution(mat)
+        top_contact_mat = scaled_mat.apply(
+            lambda row: self.scaled_matrix_to_contact_predictions(row['matrix_S'], contact_factor), axis=1)
+        df.drop(columns=['matrix_S'], inplace=True)
+        df['contact_matrix'] = top_contact_mat
+        return df
+
+    def scaled_matrix_to_contact_predictions(self, scaled_matrix, num_contact_factor=1.5):
+        """
+        Takes in a scaled coevolution matrix and returns a contact prediction matrix
+
+        By default, the leading diagonal (self contacts) are not set to 1.
+
+        :param scaled_matrix: scaled coevolution matrix
+        :param num_contact_factor: 1.5 (default)
+        :return: contact prediction matrix
+        """
+        self.get_top_contacts_from_coevolution(scaled_matrix, num_contact_factor)
+
+        contact_mat = np.zeros(scaled_matrix.shape)
+        top_contacts = self.get_top_contacts_from_coevolution(scaled_matrix)
+
+        res_a = np.array(top_contacts['ResA'].values, dtype=int) - 1
+        res_b = np.array(top_contacts['ResB'].values, dtype=int) - 1
+
+        # contact_matrix = np.eye(scaled_matrix.shape[0], dtype=np.int8)  # set diagonal to 1, if needed
+        contact_mat[res_a, res_b] = 1
+        contact_mat[res_b, res_a] = 1
+
+        return contact_mat
 
     @staticmethod
     def calculate_scaled_coevolution_matrix(matrix) -> np.ndarray:
@@ -31,7 +81,8 @@ class CoMAnalysis(object):
             _scaled_matrix[_scaled_matrix < np.average(_scaled_matrix)] = 0
         return _scaled_matrix
 
-    def scale_and_normalise_coevolution_matrices(self, df: pd.DataFrame, normalise_matrix=True) -> pd.DataFrame:
+    @staticmethod
+    def scale_and_normalise_coevolution_matrices(df: pd.DataFrame, normalise_matrix=True) -> pd.DataFrame:
         """
         scales coevolution matrix by average, set all values <average to 0 --> S
         scale S by max of all S in the data frame and add additional column of normalised matrices
@@ -45,7 +96,7 @@ class CoMAnalysis(object):
         # get scaled coevolution matrices
         _max_of_SM = []
         for _matrix in df['matrix']:
-            _scaled_M = self.calculate_scaled_coevolution_matrix(_matrix)
+            _scaled_M = CoMAnalysis.calculate_scaled_coevolution_matrix(_matrix)
             _list_matrix_S.append(_scaled_M)
             _max_of_SM.append(np.max(_scaled_M))
         df["matrix_S"] = _list_matrix_S
@@ -91,49 +142,51 @@ class CoMAnalysis(object):
         self.df_top_scores['ResB'] = self.df_top_scores['ResB'].astype('str')
         return self.df_top_scores
 
-    def get_top_contacts_from_coevolution(self,scaled_matrix,num_contact_factor=1.5):
-        '''
+    def get_top_contacts_from_coevolution(self, scaled_matrix, num_contact_factor=1.5):
+        """
             returns 'N' top scoring residues as a dataframe
             by default, consistent with GREMLIN, top 1.5xL pairs are returned, L being the length of the protein
-        
+
         :param scaled_matrix:
         :param num_contact_factor:
         :return: data frame with top residue pairs
-        '''        
-        df_top_contacts=[]
-        max_i,max_j = scaled_matrix.shape
-        
-        if(max_i == 0):
+        """
+        df_top_contacts = []
+        max_i, max_j = scaled_matrix.shape
+
+        if max_i == 0:
             print("Matrix is empty. Please check and provide a scaled matrix")
             exit()
-        
-        if(max_i>0):
-            num_top_pairs = round(num_contact_factor*max_i)
-            self.get_top_scoring_residues(scaled_matrix,3,75)
-            if(len(self.df_top_scores)>num_top_pairs):
-                df_top_contacts=self.df_top_scores.iloc[:num_top_pairs]
+
+        if max_i > 0:
+            num_top_pairs = round(num_contact_factor * max_i)
+            self.get_top_scoring_residues(scaled_matrix, 3, 75)
+            if len(self.df_top_scores) > num_top_pairs:
+                df_top_contacts = self.df_top_scores.iloc[:num_top_pairs]
             else:
-                df_top_contacts=self.df_top_scores
-                
+                df_top_contacts = self.df_top_scores
+
         return df_top_contacts
-    
-    def get_residue_frequencies(self,top_residue_pairs):
-        '''
+
+    def get_residue_frequencies(self, top_residue_pairs):
+        """
         Calculate the residue frequencies count from the top_scoring_residue pairs list
 
         :param top_residue_pairs:
         :return: dataframe with residueID and count df_res_count
-        '''
-        
+        """
+
         if len(top_residue_pairs) == 0:
             print("Length of the residue pairs list is 0. Nothing to be done.")
         else:
-        
-            _top_res_pairs_array=np.asarray(top_residue_pairs)
-            _res_array_count=np.array(np.unique(np.concatenate((_top_res_pairs_array[:,0],_top_res_pairs_array[:,1])),return_counts=True)).T
-            df_res_count=pd.DataFrame(_res_array_count,columns=["residueID","count"],dtype=np.int32)
-            df_res_count=df_res_count.sort_values(by=['count'],ascending=False)
-        
+
+            _top_res_pairs_array = np.asarray(top_residue_pairs)
+            _res_array_count = np.array(
+                np.unique(np.concatenate((_top_res_pairs_array[:, 0], _top_res_pairs_array[:, 1])),
+                          return_counts=True)).T
+            df_res_count = pd.DataFrame(_res_array_count, columns=["residueID", "count"], dtype=np.int32)
+            df_res_count = df_res_count.sort_values(by=['count'], ascending=False)
+
             _full_residue_list = top_residue_pairs["ResA"].to_list() + top_residue_pairs["ResB"].to_list()
 
             _dict_residue_counts = dict(Counter(_full_residue_list))

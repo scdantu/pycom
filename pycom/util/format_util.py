@@ -4,6 +4,8 @@ from typing import Optional
 import random
 import string
 
+import numpy as np
+
 
 def human_num(num):
     """Converts a number to a human-readable string.
@@ -49,3 +51,21 @@ def user_path(s: str) -> Optional[str]:
     if s.startswith('~'):
         return os.path.expanduser(s)
     return s
+
+
+def embed_in_larger_matrix(m: np.ndarray, length: int, offset: int = 0, value: int = -1) -> np.ndarray:
+    """
+    Embeds a smaller matrix in a larger matrix
+
+    m must be a square matrix
+
+    :param m: smaller matrix
+    :param length: length of new matrix
+    :param offset: offset, along the diagonal, to place the smaller matrix (default: 0)
+    :param value: value to fill the larger matrix with (default: -1)
+    """
+    assert m.shape[0] == m.shape[1], 'Matrix must be square'
+    assert m.shape[0] + offset <= length, 'Matrix does not fit in larger matrix'
+    out = np.full((length, length), value)
+    out[offset:offset + m.shape[0], offset:offset + m.shape[1]] = m
+    return out

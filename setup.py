@@ -25,7 +25,8 @@ setup(
     install_requires=[
         'pandas',
         'numpy',
-        'h5py'
+        'h5py',
+        'scipy',
     ],
     extras_require=extras_require,
     python_requires='>=3.8',

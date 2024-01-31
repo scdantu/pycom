@@ -4,10 +4,10 @@
 /**
  * Authored by Philipp Bibik (cemiu).
  * 
- * Script for extracting residues from PDB structures
+ * Script for extracting residues alongside coordinates from PDB files.
  *
  * Compile with -lz option for zLib:
- *     g++ -std=c++17 extract_residues_from_pdb.cpp -lz -o extract_residues_from_pdb
+ *     g++ -std=c++17 pdb2res.cpp -lz -o pdb2res
  *
  * Input:
  *     line-seperated list of *.ent.gz file paths in the following format. e.g.:
