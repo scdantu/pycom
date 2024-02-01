@@ -11,7 +11,7 @@ More information can be found at: https://pycom.brunel.ac.uk/
 
 Install the PyCom library with:
 
-`pip install git+https://github.com/scdantu/pycom`
+`pip3 install git+https://github.com/scdantu/pycom`
 
 Requirements:
 - Python 3.8+
@@ -30,20 +30,26 @@ https://pycom.brunel.ac.uk/downloads/
 
 ### Local Use
 
-Examples can be found in [pycom_example_local.ipynb](https://github.com/scdantu/pycom/blob/main/tutorials/pycom_example_local.ipynb).
+Examples can be found in [00_Getting_Started_Locally.ipynb](https://github.com/scdantu/pycom/blob/main/tutorials/00_Getting_Started_Locally.ipynb).
 This requires the `pycom.db` and `pycom.mat` files.
 
 ### Remote Library
 
 The library can be used remotely without downloading the `pycom.db` and `pycom.mat` files.
-A tutorial can be found in [pycom_example_remote.ipynb](https://github.com/scdantu/pycom/blob/main/tutorials/pycom_example_remote.ipynb).
+A tutorial can be found in [00_Getting_Started_Remotely.ipynb](https://github.com/scdantu/pycom/blob/main/tutorials/00_Getting_Started_Remotely.ipynb).
 
 ### API
 
 It is also possible to call the REST API directly.
 **Documentation** (Swagger): https://pycom.brunel.ac.uk/api/spec/
 **Endpoint**: https://pycom.brunel.ac.uk/api/
-**Mini Tutorial**: [03_WebAPI.ipynb](https://github.com/scdantu/pycom/blob/main/tutorials/jp_notebooks/getting_started/03_WebAPI.ipynb)
+**Mini Tutorial**: [00_WebAPI.ipynb](https://github.com/scdantu/pycom/blob/main/tutorials/00_WebAPI.ipynb)
+
+### Alignment Data
+
+We also provide a webservice to download the alignment data used to generate the coevolution matrices.
+
+See: https://pycom.brunel.ac.uk/alignments/
 
 ## Contributions
 

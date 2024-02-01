@@ -120,7 +120,7 @@ class PyCom(object):
             page: Optional[int] = None,
             per_page: Optional[int] = None,
             matrix: Optional[bool] = None,
-            matrix_format: Optional[MatrixFormat] = None,
+            mat_format: Optional[MatrixFormat] = None,
     ) -> pd.DataFrame:
         """
         Find proteins in the database that match the given criteria.
@@ -180,7 +180,7 @@ class PyCom(object):
         :param page: The page number of results to return. (1-i)
         :param per_page: The number of results per page. (1-100)
         :param matrix: Whether to return the coevolution matrix with the results.
-        :param matrix_format: The format of the coevolution matrix. (MatrixFormat.NUMPY or MatrixFormat.PANDAS)
+        :param mat_format: The format of the coevolution matrix. (MatrixFormat.NUMPY or MatrixFormat.PANDAS)
 
         :return: A pandas DataFrame containing the proteins that match the given criteria.
         raise NotImplementedError('Implementation at bottom of file')

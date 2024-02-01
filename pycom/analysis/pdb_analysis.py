@@ -95,7 +95,7 @@ class _PDBAnalysisFast:
             raise RuntimeError(f'pdb2res executable not found at {pdb2res_executable_path}.\n'
                                f'Please compile the C++ code and place in the desired location.\n'
                                f'pdb2res.cpp can be found at: https://github.com/scdantu/pycom/blob/main/pycom'
-                               f'/validation/pdb2res.cpp\n'
+                               f'/analysis/pdb2res.cpp\n'
                                f'Requires -lz flag for zlib (and zlib needs to be installed).\n'
                                f'g++ -std=c++17 pdb2res.cpp -lz -o bin/pdb2res\n')
         self.pdb2res = pdb2res_executable_path

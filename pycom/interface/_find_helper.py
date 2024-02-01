@@ -29,8 +29,8 @@ def get_valid_find_params(
     Validate that the parameters passed to find() are valid and return a dictionary of the parameters
     """
     if not remote:
-        assert {'page', 'per_page', 'matrix', 'matrix_format'}.isdisjoint(kwargs.keys()), \
-            'page, per_page, matrix and matrix_format are invalid for local queries (only valid for remote queries)'
+        assert {'page', 'per_page', 'matrix', 'mat_format'}.isdisjoint(kwargs.keys()), \
+            'page, per_page, matrix and mat_format are invalid for local queries (only valid for remote queries)'
 
     # if no arguments are passed, return all proteins
     assert not (constraint_dict is not None and kwargs != {}), 'Use either a dictionary or keywords, not both'

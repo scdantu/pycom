@@ -5,8 +5,9 @@ PyCoMdb is divided into two files:
 
  #. pycom.db: Database with protein annotation information (700MB)
  #. pycom.mat: Coevolution matrices in HDF5 format (115GB)
- #. All the alignment files are provided individually as ASCII text files. See the following tutorial on how to download them.  
- 
+
+Additionally, we provide the alignment files for each protein in the database. See: https://pycom.brunel.ac.uk/alignments/
+
 .. warning::
 
    Downloading the full database (including the alignment files) requires 1.2TB of disk space.  
@@ -15,10 +16,12 @@ PyCoMdb is divided into two files:
 Instructions
 ------------
 
-Please download the files from:
+Please download the files from: https://pycom.brunel.ac.uk/downloads/
 
-   #. `pycom.db <https://pycom.brunel.ac.uk/downloads/pycom.db>`_
-   #. `pycom.mat <https://pycom.brunel.ac.uk/downloads/pycom.mat>`_
+The required files are:
+
+   #. `pycom.db <https://pycom.brunel.ac.uk/downloads/pycom.db>`_ (to query the database)
+   #. `pycom.mat <https://pycom.brunel.ac.uk/downloads/pycom.mat>`_ (to load the coevolution matrices)
    #. Please note that you can only access individual alignment files. Instructions on how to download the alignment files are available from the `tutorial <tutorials.html>`_.
       
 .. _ref-querykw:

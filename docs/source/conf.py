@@ -18,8 +18,8 @@ sys.path.insert(0, os.path.abspath('../../'))
 # -- Project information -----------------------------------------------------
 
 project = 'PyCoM'
-copyright = '2023, Sarath Dantu'  # noqa
-author = 'Sarath Dantu'
+copyright = '2023, Sarath Dantu & Philipp Bibik'  # noqa
+author = 'Sarath Dantu & Philipp Bibik'
 version = '1.0'
 # The full version, including alpha/beta/rc tags
 release = version
@@ -47,7 +47,7 @@ templates_path = ['_templates']
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = ["../../tutorials/jp_notebooks/00_Installation.ipynb"]
+exclude_patterns = ["../../tutorials/00_Installation.ipynb"]
 
 
 # -- Options for HTML output -------------------------------------------------
