@@ -56,10 +56,11 @@ How to Cite
 .. toctree::
    :maxdepth: 3
    :caption: Contents:
-   
-      Database <database>
+
       Getting Started <gettingstarted>
       Tutorials <tutorials>
+      GitHub <https://google.com>
+      Database <database>
       Documentation <documentation>
       Help <help>
 
