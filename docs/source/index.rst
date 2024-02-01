@@ -57,9 +57,10 @@ How to Cite
    :maxdepth: 3
    :caption: Contents:
 
+      PyCom <https://pycom.brunel.ac.uk>
       Getting Started <gettingstarted>
       Tutorials <tutorials>
-      GitHub <https://google.com>
+      GitHub <https://github.com/scdantu/pycom/tree/main>
       Database <database>
       Documentation <documentation>
       Help <help>
