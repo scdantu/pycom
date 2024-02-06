@@ -80,7 +80,7 @@ PyCoM breaks down into:
     - **Querying** - Search for proteins based on various criteria
     - **Coevolution Matrices** - Load coevolution matrices for proteins
     - **Analysis** - A set of tools for performing analysis on coevolution matrices `Analysis Tutorial <tutorials/01_Workflow.html>`_
-    - **PDB parsing/analysis** - A set of tools for parsing and analysing PDB files. `PDB Tutorial <tutorials/05_Contact_Map_and_PDB.html>`_
+    - **PDB&AlphaFold PDB parsing/analysis** - A set of tools for parsing and analysing PDB files. `PDB Tutorial <tutorials/05_Contact_Map_and_PDB.html>`_
 
 - **PyCoM API**: A RESTful API to query, extract and visualise coevolution matrices from PyCoMdb
 
@@ -123,7 +123,7 @@ Authors
    :maxdepth: 3
    :caption: Contents:
 
-      PyCom <self>
+      PyCoM <self>
       Getting Started <gettingstarted>
       Tutorials <tutorials>
       Database <database>
@@ -134,5 +134,3 @@ Indices and tables
 ------------------
 
 * :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`

@@ -31,7 +31,7 @@ _AA_LOOKUP = {
 }
 
 
-def _read_pdb_gz(pdb_ent_gz_file_path):
+def _read_pdb_ent_file(pdb_ent_gz_file_path):
     assert os.path.exists(pdb_ent_gz_file_path), f'File not found: {pdb_ent_gz_file_path}'
     assert pdb_ent_gz_file_path.endswith('.ent.gz'), 'File must be a .ent.gz file'
 
@@ -41,11 +41,26 @@ def _read_pdb_gz(pdb_ent_gz_file_path):
     return file_content.splitlines()
 
 
+def _read_pdb_file(pdb_ent_gz_file_path):
+    # assert file ends in .ent.gz or .ent or .pdb
+    assert os.path.exists(pdb_ent_gz_file_path), f'File not found: {pdb_ent_gz_file_path}'
+    assert (pdb_ent_gz_file_path.endswith('.ent.gz') or
+            pdb_ent_gz_file_path.endswith('.ent') or
+            pdb_ent_gz_file_path.endswith('.pdb')), 'File must be a .ent.gz, .ent or .pdb file'
+
+    if pdb_ent_gz_file_path.endswith('.ent.gz'):
+        return _read_pdb_ent_file(pdb_ent_gz_file_path)
+    else:
+        with open(pdb_ent_gz_file_path, 'r') as f:
+            return f.read().splitlines()
+
+
 def residues_from_pdb(pdb_ent_gz_file_path) -> np.ndarray:
     """
     Returns a list of residues from a PDB file. PDB file must be in .ent.gz format. (compressed)
+    or .ent/.pdb format (uncompressed)
     """
-    pdb_file = _read_pdb_gz(pdb_ent_gz_file_path)
+    pdb_file = _read_pdb_file(pdb_ent_gz_file_path)
     last_resseq = 0
 
     out = []

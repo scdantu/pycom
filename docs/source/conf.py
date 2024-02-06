@@ -20,28 +20,38 @@ sys.path.insert(0, os.path.abspath('../../'))
 project = 'PyCoM'
 copyright = '2023, Sarath Dantu & Philipp Bibik'  # noqa
 author = 'Sarath Dantu & Philipp Bibik'
-version = '1.0'
-html_title = 'PyCoM Documentation'
+# version = '1.0'
+html_baseurl = 'https://pycom.brunel.ac.uk/'
+html_title = 'PyCoM Protein Database'
 html_favicon = '_static/brunel.png'
 # The full version, including alpha/beta/rc tags
-release = version
+# release = version
 
+sitemap_locales = []
+sitemap_url_scheme = "{link}"
+
+html_sidebars = {
+   '**': ['globaltoc.html', 'sourcelink.html', 'searchbox.html'],
+   'using/windows': ['windowssidebar.html', 'searchbox.html'],
+}
 
 # -- General configuration ---------------------------------------------------
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['sphinx.ext.intersphinx',
-              'nbsphinx',
-              'sphinx.ext.autodoc',
-              'sphinx.ext.viewcode',
-              'sphinx.ext.autosummary',
-              'sphinx_copybutton',
-              'sphinxcontrib.excel',
-              'sphinxcontrib.xlsxtable',
-              'sphinx.ext.napoleon'
-              ]
+extensions = [
+    'sphinx.ext.intersphinx',
+    'nbsphinx',
+    'sphinx.ext.autodoc',
+    'sphinx.ext.viewcode',
+    'sphinx.ext.autosummary',
+    'sphinx_copybutton',
+    'sphinxcontrib.excel',
+    'sphinxcontrib.xlsxtable',
+    'sphinx.ext.napoleon',
+    'sphinx_sitemap'
+]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -49,7 +59,8 @@ templates_path = ['_templates']
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = ["../../tutorials/00_Installation.ipynb"]
+# exclude_patterns = ["../../tutorials/00_Installation.ipynb"]
+
 
 
 # -- Options for HTML output -------------------------------------------------
