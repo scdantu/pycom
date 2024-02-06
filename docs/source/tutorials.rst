@@ -3,14 +3,14 @@ Tutorials
 
    After successfully `installing <gettingstarted.html>`_ and completing the `quick guides <gettingstarted.html>`_ of PyCoM
    please go through the following tutorials that will show you how to:
-    #. Create a data analysis workflow with PyCoM
-    #. Some example use-cases
-    #. How to analyse an example alignment
-    #. How to generate the images from the manuscript
-    #. How to extract contact maps and process PDB files
+
+   #. Create a data analysis workflow with PyCoM
+   #. Some example use-cases
+   #. How to analyse an example alignment
+   #. How to generate the images from the manuscript
+   #. How to extract contact maps and process PDB files
 
 .. toctree::
-   :numbered:
    :name: tutotialstoc
    :titlesonly:
    :maxdepth: 3

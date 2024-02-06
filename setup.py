@@ -10,7 +10,8 @@ extras_require = {
     'flask-parameter-validation': ['Flask-Parameter-Validation'],
     'werkzeug': ['Werkzeug'],
     'requests': ['Requests'],
-    'logomaker': ['logomaker']
+    'logomaker': ['logomaker'],
+    'matplotlib': ['matplotlib'],
 }
 
 setup(

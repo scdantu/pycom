@@ -21,6 +21,8 @@ project = 'PyCoM'
 copyright = '2023, Sarath Dantu & Philipp Bibik'  # noqa
 author = 'Sarath Dantu & Philipp Bibik'
 version = '1.0'
+html_title = 'PyCoM Documentation'
+html_favicon = '_static/brunel.png'
 # The full version, including alpha/beta/rc tags
 release = version
 

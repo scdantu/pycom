@@ -9,11 +9,8 @@ Documentation
 
 This is the documentation of the three core classes that users will be interacting with:
    #. :class:`PyCoM`
-   #. :class:`ProteinParams`
    #. :class:`CoMAnalysis`
 
-.. automodule:: pycom.interface.PyCom
-    :members:
 
 Quick Summary
 -------------
@@ -35,10 +32,6 @@ Quick Summary
    pycom.interface.PyCom.get_organism_list
    pycom.interface.PyCom.get_ptm_list
    
-.. currentmodule:: pycom.selector.ProteinParams
-.. autosummary::
-   pycom.selector.ProteinParams.descriptions
-   
 .. currentmodule:: pycom.analysis.CoMAnalysis
 .. autosummary::
    pycom.analysis.CoMAnalysis.add_contact_predictions
@@ -59,4 +52,3 @@ Class Documentation
 
    PyCom class <api_pycom>
    Matrix analysis <api_matrix_analysis>
-   Query words Selection  <api_params>

@@ -7,6 +7,7 @@ PyCom
 
 .. automodule:: pycom.interface.PyCom
     :members:
+    :noindex:
 
 Quick Summary
 -------------
