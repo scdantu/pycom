@@ -100,11 +100,12 @@ def _get_client_ip(request):
 
 
 @app.route('/api/', methods=['GET'])
-def landing():
-    raise AssertionError('/api is not an endpoint. Try /api/find, /api/get-disease-list, '
-                         '/api/get-cofactor-list, /api/get-organism-list, /api/get-biological-process-list, '
-                         '/api/get-cellular-component-list, /api/get-development-stage-list, /api/get-domain-list, '
-                         '/api/get-ligand-list, /api/get-molecular-function-list, /api/get-ptm-list')
+def landing():  # return landing.html
+    # raise AssertionError('/api is not an endpoint. Try /api/find, /api/get-disease-list, '
+    #                      '/api/get-cofactor-list, /api/get-organism-list, /api/get-biological-process-list, '
+    #                      '/api/get-cellular-component-list, /api/get-development-stage-list, /api/get-domain-list, '
+    #                      '/api/get-ligand-list, /api/get-molecular-function-list, /api/get-ptm-list')
+    return flask.render_template('landing.html')
 
 
 @app.route('/api/find', methods=['GET'])

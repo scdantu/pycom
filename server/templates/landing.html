@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>PyCoM API</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>PyCoM API</h1>
+
+    <p>PyCoM comes with a RESTful API hosted at <a href="https://pycom.brunel.ac.uk/api/">https://pycom.brunel.ac.uk/api/</a>. It can be used to query the 540,000+ proteins alongside coevolution matrices.</p>
+
+    <h2>Guides</h2>
+    <p>Full specifications (in Swagger) are available at: <a href="https://pycom.brunel.ac.uk/api/spec/">https://pycom.brunel.ac.uk/api/spec/</a></p>
+    <p>If you only need a <b>short tutorial</b>, one is available here: <a href="https://pycom.brunel.ac.uk/tutorials/00_WebAPI.html">https://pycom.brunel.ac.uk/tutorials/00_WebAPI.html</a></p>
+
+    <h2>Examples</h2>
+    <p>Find proteins associated with cancer (first 10 entries):</p>
+    <pre>https://pycom.brunel.ac.uk/api/find?disease=cancer</pre>
+
+    <p>Load the second page (entries 11 to 20)</p>
+    <pre>https://pycom.brunel.ac.uk/api/find?disease=cancer&page=2</pre>
+
+    <p>Entries with cofactor FAD which have a PTM, and have a disease associated with them:</p>
+    <pre>https://pycom.brunel.ac.uk/api/find?cofactor=FAD&has_ptm=true&has_disease=true</pre>
+
+    <p>Look for proteins with with 10-15 residues, and load the matrix (by setting matrix=true). Set per_page=2 to only load two proteins (instead of 10).</p>
+    <pre>https://pycom.brunel.ac.uk/api/find?min_length=10&max_length=15&matrix=true&per_page=2</pre>
+
+    <h2>List of Endpoints</h2>
+    <h3>Find Endpoint</h3>
+    <p>The main endpoint (/api/find) is used to query the database.</p>
+    <pre>https://pycom.brunel.ac.uk/api/find</pre>
+
+    <p>The /api/find endpoint support the following parameters:</p>
+    <ul><li><code>uniprot_id</code>: The UniProt ID of the protein.</li><li><code>sequence</code>: The amino acid sequence of protein to search for. (full match)</li><li><code>min_length</code> / <code>max_length</code>: Min/Max number of residues in the protein.</li><li><code>min_helix</code> / <code>max_helix</code>: Min/Max percentage of helical structure in the protein.</li><li><code>min_turn</code> / <code>max_turn</code>: Min/Max percentage of turn structure in the protein.</li><li><code>min_strand</code> / <code>max_strand</code>: Min/Max percentage of beta strand structure in the protein.</li><li><code>organism</code>: Taxonomic name of the genus / species of the protein. (case-insensitive)<ul><li>Species name or any parent taxonomic level can be used. (<code>pyc.get_organism_list()</code> for full list)</li><li>Surround with <code>:</code> to get precise results<ul><li><code>:homo:</code> returns <code>Homo sapiens</code> &amp; <code>Homo sapiens neanderthalensis</code>)</li><li><code>homo</code> also returns <strong>homo</strong>eomma, t<strong>homo</strong>mys, and <em>hundreds</em> others</li></ul></li></ul></li><li><code>organism_id</code>: Precise NCBI Taxonomy ID of the species of the protein. (prefer to use <code>organism</code> instead)</li><li><code>cath</code>: CATH classification of the protein (<code>3.40.50.360</code> or <code>3.40.*.*</code> or <code>3.*</code>).</li><li><code>enzyme</code>: Enzyme Commission number of the protein. (<code>1.3.1.3</code> or <code>1.3.*.*</code> or <code>1.*</code>).</li><li><code>has_substrate</code>: Whether the protein has a known substrate. (<code>True</code>/<code>False</code>)</li><li><code>has_ptm</code>: Whether the protein has a known post-translational modification. (<code>True</code>/<code>False</code>)</li><li><code>has_pdb</code>: Whether the protein has a known PDB structure. (<code>True</code>/<code>False</code>)</li><li><code>disease</code>: The disease associated with the protein. (name of disease, case-insensitive, e.g <code>cancer</code>)<ul><li>Use <code>pyc.get_disease_list()</code> for full list.</li><li><code>cancer</code> searches for <code>Ovarian cancer</code>, <code>Lung cancer</code>, ...</li></ul></li><li><code>disease_id</code>: The ID of the disease associated with the protein. (<code>DI-02205</code>, get_disease_list()</li><li><code>has_disease</code>: Whether the protein is associated with a disease. (<code>True</code>/<code>False</code>)</li><li><code>cofactor</code>: The cofactor associated with the protein. (name of cofactor, case-insensitive, e.g <code>Zn(2+)</code>])</li><li><code>cofactor_id</code>: The ID of the cofactor associated with the protein. (<code>CHEBI:00001</code>, get_cofactor_list())</li><li><code>biological_process</code>: Biological process associated with the protein. (e.g <code>antiviral defense</code>, use <code>pyc.get_biological_process_list()</code> for full list)</li><li><code>cellular_component</code>: Cellular component associated with the protein. (e.g <code>nucleus</code>, use <code>pyc.get_cellular_component_list()</code> for full list</li><li><code>domain</code>: Domain associated with the protein. (e.g <code>zinc-finger</code>, use <code>pyc.get_domain_list()</code> for full list)</li><li><code>ligand</code>: Ligand associated with the protein. (e.g <code>zinc</code>, use <code>pyc.get_ligand_list()</code> for full list</li><li><code>molecular_function</code>: Molecular function associated with the protein. (e.g <code>antioxidant activity</code>, use <code>pyc.get_molecular_function_list()</code> for full list</li><li><code>ptm</code>: Post-translational modification associated with the protein. (e.g <code>phosphoprotein</code>, use <code>pyc.get_ptm_list()</code> for full list</li></ul>
+
+    <h3>Secondary Endpoints</h3>
+    <p>There are secondary (support) endpoints. These serve static content and take no parameters.</p>
+    <pre>https://pycom.brunel.ac.uk/api/get-disease-list</pre>
+    <pre>https://pycom.brunel.ac.uk/api/get-cofactor-list</pre>
+    <pre>https://pycom.brunel.ac.uk/api/get-organism-list</pre>
+    <pre>https://pycom.brunel.ac.uk/api/get-biological-process-list</pre>
+    <pre>https://pycom.brunel.ac.uk/api/get-cellular-component-list</pre>
+    <pre>https://pycom.brunel.ac.uk/api/get-development-stage-list</pre>
+    <pre>https://pycom.brunel.ac.uk/api/get-domain-list</pre>
+    <pre>https://pycom.brunel.ac.uk/api/get-ligand-list</pre>
+    <pre>https://pycom.brunel.ac.uk/api/get-molecular-function-list</pre>
+    <pre>https://pycom.brunel.ac.uk/api/get-ptm-list</pre>
+</body>
+</html>

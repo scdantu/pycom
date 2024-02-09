@@ -24,21 +24,21 @@ PyCoM - Protein Coevolution Database (API & Python Library)
     import matplotlib.pyplot as plt
 
     pyc = PyCom(remote=True)
-    proteins = pyc.find(
-        min_length=200,
+    prots = pyc.find(        # search for proteins with:
+        min_length=200,      # 200-210 residues
         max_length=210,
-        disease='cancer',
-        has_substrate=True,
+        disease='cancer',    # that are associated with cancer
+        has_substrate=True,  # have a known substrate
         page=1,
-        matrix=True
+        matrix=True          # and load their coevolution matrices
     )
 
-    CoMAnalysis().add_contact_predictions(proteins)
-    plt.axis('off')
-    plt.title(f'Contact Map for uniprot_id={proteins.uniprot_id[0]}')
-    plt.imshow(proteins.contact_matrix[0])
+    CoMAnalysis().add_contact_predictions(prots)  # add contact predictions
 
-    print(proteins.iloc[0])
+    plt.axis('off'); plt.title(f'Contact Map for uniprot_id={prots.uniprot_id[0]}')
+    plt.imshow(prots.contact_matrix[0])  # plot the contact map
+
+    print(prots.iloc[0])  # print the protein's details
 
 
 .. list-table:: Output:
@@ -62,6 +62,8 @@ PyCoM - Protein Coevolution Database (API & Python Library)
           matrix             [[0.0, 0.268, ...
           contact_matrix     [[0.0, 0.0,   ...
           Name: 0, dtype: object
+
+Click `here <_images/example_run.png>`_ if the image is not showing.
 
 Features
 --------
