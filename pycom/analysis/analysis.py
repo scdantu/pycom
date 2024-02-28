@@ -184,7 +184,6 @@ class CoMAnalysis(object):
             _res_array_count = np.array(
                 np.unique(np.concatenate((_top_res_pairs_array[:, 0], _top_res_pairs_array[:, 1])),
                           return_counts=True)).T
-            print(_res_array_count)
             df_res_count = pd.DataFrame(_res_array_count, columns=["residueID", "count"])
             df_res_count = df_res_count.sort_values(by=['count'], ascending=False)
 
