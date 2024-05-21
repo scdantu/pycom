@@ -104,9 +104,9 @@ The parameters for generating the alignment using `HH-suite3 <https://github.com
 
 How to Cite
 -----------
-
-   Bibik. P, Alibai. S, Pandini. A, Dantu, S.C. "PyCoM: a python API to query, extract and visualise coevolution matrices". 2023
-
+    If you have found PyCoM useful for your research work please cite the following article published in `Bioinformatics journal <https://academic.oup.com/bioinformatics/>`_:
+    
+    **Philipp Bibik, Sabriyeh Alibai, Alessandro Pandini, Sarath Chandra Dantu, PyCoM: a python library for large-scale analysis of residue–residue coevolution data, Bioinformatics, Volume 40, Issue 4, April 2024, btae16.** `web link <https://academic.oup.com/bioinformatics/article/40/4/btae166/7635577>`_
 
 Authors
 -----------

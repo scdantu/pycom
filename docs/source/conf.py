@@ -50,7 +50,8 @@ extensions = [
     'sphinxcontrib.excel',
     'sphinxcontrib.xlsxtable',
     'sphinx.ext.napoleon',
-    'sphinx_sitemap'
+    'sphinx_sitemap',
+    'sphinx_new_tab_link'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
