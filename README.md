@@ -1,6 +1,11 @@
 
 # PyCom
 
+[Bioinformatics] PyCoM: a python library for large-scale analysis of residue–residue coevolution data
+https://doi.org/10.1093/bioinformatics/btae166
+
+---
+
 Python Library (both local and remote!) & REST API for accessing the PyCom Database.
 
 PyCom is an open-source, queryable database of Protein Residue-Residue Contacts (Coevolution Matrices) and annotation data derived from UniProt (Swiss-Prot to be precise!) using HHBlits/HHFilter/CCmpred.
@@ -50,6 +55,23 @@ It is also possible to call the REST API directly.
 We also provide a webservice to download the alignment data used to generate the coevolution matrices.
 
 See: https://pycom.brunel.ac.uk/alignments/
+
+## Cite us
+
+If our work was helpful, you can cite us!
+
+```bib
+@article{bibik2024pycom,
+    author = {Bibik, Philipp and Alibai, Sabriyeh and Pandini, Alessandro and Dantu, Sarath Chandra},
+    title = "{PyCoM: a python library for large-scale analysis of residue–residue coevolution data}",
+    journal = {Bioinformatics},
+    volume = {40},
+    number = {4},
+    pages = {btae166},
+    year = {2024},
+    url = {https://doi.org/10.1093/bioinformatics/btae166},
+}
+```
 
 ## Contributions
 
