@@ -1,5 +1,9 @@
 .. PyCoM documentation master file
 
+PyCoM-Web 
+==============================================================================
+
+We are happy to announce that we are now able to provide you access to the PyCoM database through a web interface `pycomweb <pycomweb.html>`_.
 
 PyCoM - Protein Coevolution Database (API & Python Library)
 ==============================================================================
