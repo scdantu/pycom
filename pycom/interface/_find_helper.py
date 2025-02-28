@@ -67,14 +67,12 @@ def query_db(db_path, query, params):
     e.g. when using flask-caching:
         query_db = cache.memoize(timeout=360, cache_none=True)(query_db)
     """
-    conn = sqlite3.connect(f'file:{db_path}?mode=ro', uri=True)
-    c = conn.cursor()
-    c.execute(query, params)
+    with sqlite3.connect(f'file:{db_path}?mode=ro', uri=True) as conn:
+        c = conn.cursor()
+        c.execute(query, params)
 
-    result: list = c.fetchall()
-    result: pd.DataFrame = pd.DataFrame(result, columns=PyComSQLQueryBuilder.columns)
-
-    conn.close()
+        result: list = c.fetchall()
+        result: pd.DataFrame = pd.DataFrame(result, columns=PyComSQLQueryBuilder.columns)
 
     return result
 
