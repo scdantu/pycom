@@ -2,7 +2,7 @@
 #include <zlib.h>
 
 /**
- * Authored by Philipp Bibik (cemiu).
+ * Authored by Philipp E. Glass (cemiu).
  * 
  * Script for extracting residues alongside coordinates from PDB files.
  *

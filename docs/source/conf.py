@@ -18,8 +18,8 @@ sys.path.insert(0, os.path.abspath('../../'))
 # -- Project information -----------------------------------------------------
 
 project = 'PyCoM'
-copyright = '2023, Sarath Dantu & Philipp Bibik'  # noqa
-author = 'Sarath Dantu & Philipp Bibik'
+copyright = '2025, Sarath Dantu & Philipp E. Glass'  # noqa
+author = 'Sarath Dantu & Philipp E. Glass'
 # version = '1.0'
 html_baseurl = 'https://pycom.brunel.ac.uk/'
 html_title = 'PyCoM Protein Database'

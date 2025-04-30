@@ -18,7 +18,7 @@ setup(
     name='pycom',
     version=version,
     description='Python library PyCoM for interacting with the database of Coevolution matrices of proteins (PyCoMdb)',
-    author='Philipp Bibik, Sarath Chandra Dantu',
+    author='Philipp E Glass, Sarath Chandra Dantu',
     author_email='sarath.dantu@brunel.ac.uk',
     url='https://github.com/scdantu/pycom',
     license_files='LICENSE.txt',

@@ -61,8 +61,8 @@ See: https://pycom.brunel.ac.uk/alignments/
 If our work was helpful, you can cite us!
 
 ```bib
-@article{bibik2024pycom,
-    author = {Bibik, Philipp and Alibai, Sabriyeh and Pandini, Alessandro and Dantu, Sarath Chandra},
+@article{glass2024pycom,
+    author = {Glass, Philipp E and Alibai, Sabriyeh and Pandini, Alessandro and Dantu, Sarath Chandra},
     title = "{PyCoM: a python library for large-scale analysis of residue–residue coevolution data}",
     journal = {Bioinformatics},
     volume = {40},
@@ -75,10 +75,10 @@ If our work was helpful, you can cite us!
 
 ## Contributions
 
-The [PyComDB database creation](https://github.com/cemiu/pycom_generator) and HPC deployment was largely done by [Philipp Bibik](https://github.com/cemiu) under scientific advisement from [Sarath Dantu](https://github.com/scdantu).
+The [PyComDB database creation](https://github.com/cemiu/pycom_generator) and HPC deployment was largely done by [Philipp E. Glass](https://github.com/cemiu) under scientific advisement from [Sarath Dantu](https://github.com/scdantu).
 
-The Python interface and REST API (this repo) was primary written by Philipp Bibik, with contributions from Sarath Dantu.
+The Python interface and REST API (this repo) was primary written by Philipp E. Glass, with contributions from Sarath Dantu.
 
-Tutorials and documentation were created by Sarath Dantu and Philipp Bibik.
+Tutorials and documentation were created by Sarath Dantu and Philipp E. Glass.
 
 Sarath Dantu served as the PI for this project. Without additional support from Alessandro Pandini, this project would not have been possible.

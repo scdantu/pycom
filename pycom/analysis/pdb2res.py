@@ -1,5 +1,5 @@
 """
-Author: Philipp Bibik (cemiu)
+Author: Philipp E. Glass (cemiu)
 
 Simple PDB parser. residues_from_pdb() take in a PDB file in .ent.gz format and returns a list of residues
 along with their coordinates.
