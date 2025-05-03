@@ -1,0 +1,7 @@
+User-Agent: *
+Disallow: /_modules
+Disallow: /search.html
+Allow: /
+
+Sitemap: https://pycom.brunel.ac.uk/_static/sitemap_static.xml
+Sitemap: https://pycom.brunel.ac.uk/sitemap.xml

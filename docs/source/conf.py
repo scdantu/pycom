@@ -24,6 +24,7 @@ author = 'Sarath Dantu & Philipp E. Glass'
 html_baseurl = 'https://pycom.brunel.ac.uk/'
 html_title = 'PyCoM Protein Database'
 html_favicon = '_static/brunel.png'
+html_show_sphinx = False
 # The full version, including alpha/beta/rc tags
 # release = version
 
@@ -62,6 +63,7 @@ templates_path = ['_templates']
 # This pattern also affects html_static_path and html_extra_path.
 #exclude_patterns = ["../../tutorials/00_Installation.ipynb"]
 exclude_patterns = ['_build', '**.ipynb_checkpoints']
+html_extra_path = ['robots.txt', 'google912b99b4d1b6cf36.html']
 
 
 # -- Options for HTML output -------------------------------------------------

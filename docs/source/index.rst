@@ -1,12 +1,12 @@
 .. PyCoM documentation master file
 
-Welcome to PyCoM: Unlock the Power of Protein Coevolution Analysis!
+PyCoM: A Protein Coevolution Database
 =============================================================================
 
-April 2025: **Introducing PyCoM-Web:** Seamlessly access the extensive PyCoM database through our intuitive web interface— `pycomweb <pycomweb.html>`_.
+..
+    **News:**
 
-**PyCoM – Protein Coevolution Database (API & Python Library)**
-=============================================================================
+    April 2025: **Introducing PyCoM-Web:** Seamlessly access the extensive PyCoM database through our intuitive web interface— `pycomweb <pycomweb.html>`_.
 
 PyCoM provides researchers and bioinformaticians with a database of **457,622 annotated proteins and Coevolution Matrices** alongside an intuitive Python API, a comprehensive library with tools for analysis, and REST API. sourced from `UniProtKB/Swiss-Prot <https://www.expasy.org/resources/uniprotkb-swiss-prot>`_ and processed with `HH-suite3 <https://github.com/soedinglab/hh-suite>`_ and `CCMpred <https://github.com/soedinglab/CCMpred>`_. PyCoM simplifies the complex task of protein coevolution analysis. Additionally we host the *PyCoM Alignment Repository*, containing pre-computed for most proteins in SwissProt.
 
@@ -81,15 +81,19 @@ Effortlessly query proteins linked to specific conditions, visualize coevolution
 
 - **PyCoMdb**: Extensive database of coevolution matrices, accessible at `PyCoMdb Downloads <https://pycom.brunel.ac.uk/downloads/>`_.
 - **PyCoM Python Library**:
+
   - **Querying**: Quickly find proteins by specific criteria.
   - **Coevolution Matrix Analysis**: Visualize and analyze detailed coevolution data (`Analysis Tutorial <tutorials/01_Workflow.html>`_).
+
   - **PDB & AlphaFold Analysis**: Integrated tools for protein structure parsing and analysis (`PDB Tutorial <tutorials/05_Contact_Map_and_PDB.html>`_).
 
 - **RESTful API**:
+
   - Direct and flexible access through our RESTful API (`API Guide <tutorials/00_WebAPI.html>`_).
   - Available at: https://pycom.brunel.ac.uk/api/
 
 - **Alignment File Repository**:
+
   - Over 370,000 protein alignment files available at `Alignment Repository <https://pycom.brunel.ac.uk/alignments/>`_.
   - Comprehensive guide: `Alignment Analysis Tutorial <tutorials/03_Alignment_analysis.html>`_.
 
@@ -101,6 +105,7 @@ How to Cite PyCoM
 Please cite the following if PyCoM supports your research:
 
 **Harvard-style citation**:
+
 Glass, P.E., Alibai, S., Pandini, A. & Dantu, S.C., 2024. PyCoM: a Python library for large-scale analysis of residue–residue coevolution data. *Bioinformatics*, 40(4), p.btae166. https://doi.org/10.1093/bioinformatics/btae166
 
 **BibTeX**:
@@ -136,7 +141,8 @@ Brunel University London, UK
    Tutorials <tutorials>
    Database <database>
    Documentation <documentation>
-   GitHub <https://github.com/scdantu/pycom>
+   Privacy <privacy>
+   GitHub (external link) <https://github.com/scdantu/pycom>
 
 Indices and tables
 ------------------
